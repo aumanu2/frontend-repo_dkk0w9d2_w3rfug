@@ -3,6 +3,7 @@ import HeroMulti from './components/HeroMulti';
 import Filters from './components/Filters';
 import PreacherGrid from './components/PreacherGrid';
 import HowItWorks from './components/HowItWorks';
+import Profile from './components/Profile';
 import { Menu, X } from 'lucide-react';
 
 export default function App() {
@@ -22,7 +23,7 @@ export default function App() {
       links: {
         videos: '#',
         articles: '#',
-        profile: '#',
+        profile: '#profile',
       },
     },
     {
@@ -32,7 +33,7 @@ export default function App() {
       topics: ['Akhlak', 'Tauhid'],
       method: 'Offline',
       photo: 'https://images.unsplash.com/photo-1541534401786-2077eed87a72?q=80&w=400&auto=format&fit=crop',
-      links: { videos: '#', articles: '#', profile: '#' },
+      links: { videos: '#', articles: '#', profile: '#profile' },
     },
     {
       id: 'p3',
@@ -41,7 +42,7 @@ export default function App() {
       topics: ['Fiqih', 'Tafsir'],
       method: 'Online',
       photo: 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=400&auto=format&fit=crop',
-      links: { videos: '#', articles: '#', profile: '#' },
+      links: { videos: '#', articles: '#', profile: '#profile' },
     },
     {
       id: 'p4',
@@ -50,7 +51,7 @@ export default function App() {
       topics: ['Keluarga', 'Akhlak', 'Tafsir'],
       method: 'Hybrid',
       photo: 'https://images.unsplash.com/photo-1520975922284-7b683db681d9?q=80&w=400&auto=format&fit=crop',
-      links: { videos: '#', articles: '#', profile: '#' },
+      links: { videos: '#', articles: '#', profile: '#profile' },
     },
     {
       id: 'p5',
@@ -59,7 +60,7 @@ export default function App() {
       topics: ['Tauhid', 'Fiqih'],
       method: 'Offline',
       photo: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400&auto=format&fit=crop',
-      links: { videos: '#', articles: '#', profile: '#' },
+      links: { videos: '#', articles: '#', profile: '#profile' },
     },
   ];
 
@@ -80,6 +81,7 @@ export default function App() {
   const nav = [
     { href: '#direktori', label: 'Direktori' },
     { href: '#filter', label: 'Filter' },
+    { href: '#profile', label: 'Profil' },
     { href: '#cara-kerja', label: 'Cara Kerja' },
   ];
 
@@ -117,6 +119,8 @@ export default function App() {
         </div>
 
         <PreacherGrid data={filtered} />
+
+        <Profile />
 
         <div id="cara-kerja">
           <HowItWorks />

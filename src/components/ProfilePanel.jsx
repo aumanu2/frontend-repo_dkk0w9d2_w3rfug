@@ -1,63 +1,78 @@
-import { MapPin, BookCopy, Layers, Calendar, X } from 'lucide-react';
+import { X, ExternalLink, MapPin, BookOpen, User } from 'lucide-react';
 
 export default function ProfilePanel({ selected, onClose }) {
   if (!selected) return null;
-
   const p = selected;
   return (
-    <section className="fixed inset-0 z-50 bg-emerald-900/30 flex items-end md:items-center justify-center px-4" role="dialog" aria-modal="true">
-      <div className="w-full md:max-w-3xl bg-white rounded-t-2xl md:rounded-2xl shadow-xl overflow-hidden">
-        <div className="relative">
-          <img src={p.photo} alt={p.name} className="w-full h-52 object-cover" />
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 inline-flex items-center justify-center h-9 w-9 rounded-full bg-white/90 text-emerald-800 hover:bg-white shadow"
-            aria-label="Tutup profil"
-          >
-            <X size={18} />
-          </button>
-        </div>
-        <div className="p-5">
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <h3 className="text-xl font-semibold text-emerald-900">{p.name}</h3>
-              <div className="flex items-center gap-1 text-emerald-600/80 text-sm"><MapPin size={14} /> {p.city}</div>
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+      <div className="absolute inset-0 bg-emerald-900/40" onClick={onClose} />
+      <div className="relative w-full sm:max-w-2xl bg-white rounded-t-2xl sm:rounded-2xl shadow-xl overflow-hidden">
+        <button
+          onClick={onClose}
+          className="absolute right-3 top-3 p-2 rounded-full bg-white/90 border border-emerald-100 text-emerald-700 hover:bg-emerald-50"
+          aria-label="Tutup"
+        >
+          <X className="h-5 w-5" />
+        </button>
+        <div className="grid sm:grid-cols-2">
+          <div className="bg-emerald-50">
+            <div className="aspect-[4/3] w-full overflow-hidden">
+              {p.photo ? (
+                <img src={p.photo} alt={p.name} className="h-full w-full object-cover" />
+              ) : (
+                <div className="h-full w-full grid place-items-center text-emerald-400">
+                  <User className="h-12 w-12" />
+                </div>
+              )}
             </div>
           </div>
-
-          <div className="mt-4 grid md:grid-cols-3 gap-4">
-            <div className="md:col-span-2">
-              <h4 className="font-semibold text-emerald-900">Profil Singkat</h4>
-              <p className="mt-1 text-emerald-700/90 text-sm leading-relaxed">
-                {p.bio || 'Pendakwah yang aktif menyampaikan kajian seputar akhlak, keluarga, dan penguatan iman dengan pendekatan santun dan penuh hikmah.'}
-              </p>
-
-              <h5 className="mt-4 font-semibold text-emerald-900 inline-flex items-center gap-2"><Layers size={16} /> Fokus Dakwah</h5>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {p.topics.map((t) => (
-                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">{t}</span>
-                ))}
+          <div className="p-5">
+            <h3 className="text-xl font-semibold text-emerald-900">{p.name}</h3>
+            <p className="mt-1 flex items-center gap-1 text-sm text-emerald-700">
+              <MapPin className="h-4 w-4" /> {p.city}
+            </p>
+            {p.bio && <p className="mt-3 text-emerald-800/80 leading-relaxed">{p.bio}</p>}
+            <div className="mt-4 space-y-2 text-sm">
+              <div className="flex items-start gap-2">
+                <BookOpen className="h-4 w-4 mt-0.5 text-emerald-700" />
+                <div>
+                  <p className="font-medium text-emerald-900">Fokus Kajian</p>
+                  <p className="text-emerald-800/80">{p.topics.join(', ')}</p>
+                </div>
               </div>
-
-              <h5 className="mt-4 font-semibold text-emerald-900 inline-flex items-center gap-2"><Calendar size={16} /> Metode</h5>
-              <p className="mt-1 text-emerald-700/90 text-sm">{p.method}</p>
+              <div className="flex items-start gap-2">
+                <span className="h-4 w-4 mt-1 rounded-full bg-emerald-600" />
+                <div>
+                  <p className="font-medium text-emerald-900">Metode</p>
+                  <p className="text-emerald-800/80">{p.method}</p>
+                </div>
+              </div>
             </div>
-
-            <div className="md:border-l md:border-emerald-100 md:pl-4">
-              <h5 className="font-semibold text-emerald-900 inline-flex items-center gap-2"><BookCopy size={16} /> Referensi</h5>
-              <ul className="mt-2 space-y-2 text-sm list-disc list-inside text-emerald-700/90">
-                {(p.references?.length ? p.references : [
-                  'Kajian Tafsir Tematik',
-                  'Fiqih Keluarga Kontemporer',
-                  'Sirah Nabawiyah untuk Pemuda',
-                ]).map((r) => (
-                  <li key={r}>{r}</li>
-                ))}
-              </ul>
-            </div>
+            {p.links?.length ? (
+              <div className="mt-4">
+                <p className="text-sm font-medium text-emerald-900">Tautan</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {p.links.map((l, idx) => (
+                    <a key={idx} href={l.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-emerald-700 hover:text-emerald-900 underline">
+                      <ExternalLink className="h-4 w-4" /> {l.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+            {p.references?.length ? (
+              <div className="mt-4">
+                <p className="text-sm font-medium text-emerald-900">Rujukan</p>
+                <ul className="mt-2 list-disc list-inside text-sm text-emerald-800/80 space-y-1">
+                  {p.references.map((r, idx) => (
+                    <li key={idx}>{r}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

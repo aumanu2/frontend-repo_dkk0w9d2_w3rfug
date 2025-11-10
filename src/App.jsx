@@ -9,65 +9,53 @@ import Footer from './components/Footer';
 const DATA = [
   {
     id: 1,
-    name: 'Ustadz Ahmad Fauzi',
+    name: 'Ustadz Ahmad Fauzan',
     city: 'Jakarta',
-    topics: ['Akhlak', 'Keluarga', 'Pemuda'],
-    method: 'Tatap muka & Daring',
-    photo:
-      'https://images.unsplash.com/photo-1544006659-f0b21884ce1d?q=80&w=1200&auto=format&fit=crop',
+    topics: ['Aqidah', 'Fiqih', 'Akhlak'],
+    method: 'Majelis Taklim',
+    photo: '',
     links: [
-      { label: 'Video Kajian', href: 'https://youtube.com' },
-      { label: 'Artikel', href: 'https://medium.com' },
+      { label: 'YouTube', url: 'https://youtube.com' },
+      { label: 'Instagram', url: 'https://instagram.com' },
     ],
-    bio: 'Aktif mengisi kajian tematik di masjid-masjid wilayah Jabodetabek dengan pendekatan sejuk dan menguatkan adab.'
+    bio: 'Aktif membina kajian rutin dan pembinaan akhlak pemuda di wilayah Jabodetabek.',
   },
   {
     id: 2,
     name: 'Ustadzah Siti Rahma',
     city: 'Bandung',
-    topics: ['Tafsir', 'Akhwat', 'Keluarga'],
-    method: 'Tatap muka',
-    photo:
-      'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1200&auto=format&fit=crop',
-    links: [
-      { label: 'Video Kajian', href: 'https://youtube.com' },
-    ],
+    topics: ['Tafsir', 'Keluarga'],
+    method: 'Kelas Daring',
+    photo: '',
+    links: [{ label: 'Website', url: 'https://example.com' }],
+    bio: 'Fokus pada edukasi keluarga sakinah dan tadabbur ayat-ayat pilihan.',
   },
   {
     id: 3,
-    name: 'Ustadz Ridwan N.',
-    city: 'Yogyakarta',
-    topics: ['Sirah', 'Akidah'],
-    method: 'Daring',
-    photo:
-      'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=1200&auto=format&fit=crop',
-    links: [
-      { label: 'Artikel', href: 'https://medium.com' },
-    ],
+    name: 'Ustadz M. Ridwan',
+    city: 'Surabaya',
+    topics: ['Sirah', 'Pemuda', 'Akhlak'],
+    method: 'Kajian Masjid',
+    photo: '',
+    links: [],
   },
   {
     id: 4,
-    name: 'Ustadzah Hana L.',
-    city: 'Surabaya',
-    topics: ['Fiqih', 'Keluarga'],
-    method: 'Tatap muka & Daring',
-    photo:
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop',
-    links: [
-      { label: 'Video Kajian', href: 'https://youtube.com' },
-    ],
+    name: 'Ustadzah Hana Lestari',
+    city: 'Yogyakarta',
+    topics: ['Fiqih Wanita', 'Adab'],
+    method: 'Seminar',
+    photo: '',
+    references: ['Buku: Fiqih Wanita Kontemporer', 'Majelis Ilmu Al-Ikhlas'],
   },
   {
     id: 5,
-    name: 'Ustadz Farhan Pratama',
-    city: 'Makassar',
-    topics: ['Akhlak', 'Muamalah'],
-    method: 'Tatap muka',
-    photo:
-      'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=1200&auto=format&fit=crop',
-    links: [
-      { label: 'Artikel', href: 'https://medium.com' },
-    ],
+    name: 'Ustadz Farhan Alim',
+    city: 'Medan',
+    topics: ['Tauhid', 'Ekonomi Syariah'],
+    method: 'Podcast',
+    photo: '',
+    links: [{ label: 'Spotify', url: 'https://spotify.com' }],
   },
 ];
 
@@ -76,28 +64,33 @@ export default function App() {
   const [filters, setFilters] = useState({ city: '', topic: '', method: '' });
   const [selected, setSelected] = useState(null);
 
-  const cities = useMemo(() => Array.from(new Set(DATA.map((d) => d.city))), []);
-  const topics = useMemo(() => Array.from(new Set(DATA.flatMap((d) => d.topics))), []);
-  const methods = useMemo(() => Array.from(new Set(DATA.map((d) => d.method))), []);
+  const cities = useMemo(() => Array.from(new Set(DATA.map((d) => d.city))).sort(), []);
+  const topics = useMemo(() => Array.from(new Set(DATA.flatMap((d) => d.topics))).sort(), []);
+  const methods = useMemo(() => Array.from(new Set(DATA.map((d) => d.method))).sort(), []);
 
   const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
     return DATA.filter((d) => {
-      const text = (d.name + ' ' + d.city + ' ' + d.topics.join(' ')).toLowerCase();
-      const s = search.trim().toLowerCase();
-      const okSearch = !s || text.includes(s);
-      const okCity = !filters.city || d.city === filters.city;
-      const okTopic = !filters.topic || d.topics.includes(filters.topic);
-      const okMethod = !filters.method || d.method === filters.method;
-      return okSearch && okCity && okTopic && okMethod;
+      const matchText = !q || [d.name, d.city, ...(d.topics || [])].join(' ').toLowerCase().includes(q);
+      const matchCity = !filters.city || d.city === filters.city;
+      const matchTopic = !filters.topic || (d.topics || []).includes(filters.topic);
+      const matchMethod = !filters.method || d.method === filters.method;
+      return matchText && matchCity && matchTopic && matchMethod;
     });
   }, [search, filters]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen bg-white text-emerald-900">
       <Navbar />
       <Hero search={search} setSearch={setSearch} />
-      <Filters filters={filters} setFilters={setFilters} cities={cities} topics={topics} methods={methods} />
-      <PreacherGrid items={filtered} onSelect={setSelected} />
+      <Filters
+        filters={filters}
+        setFilters={setFilters}
+        cities={cities}
+        topics={topics}
+        methods={methods}
+      />
+      <PreacherGrid data={filtered} onSelect={setSelected} />
       <Footer />
       <ProfilePanel selected={selected} onClose={() => setSelected(null)} />
     </div>

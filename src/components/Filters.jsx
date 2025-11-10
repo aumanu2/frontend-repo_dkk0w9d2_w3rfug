@@ -1,54 +1,27 @@
-import { ChevronDown } from 'lucide-react';
+const Select = ({ label, value, onChange, options }) => (
+  <label className="flex flex-col gap-1 text-sm text-emerald-800">
+    <span className="font-medium">{label}</span>
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="rounded-lg border border-emerald-200 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+    >
+      <option value="">Semua</option>
+      {options.map((opt) => (
+        <option key={opt} value={opt}>{opt}</option>
+      ))}
+    </select>
+  </label>
+);
 
 export default function Filters({ filters, setFilters, cities, topics, methods }) {
-  const base = 'w-full md:w-auto flex-1 md:flex-none appearance-none bg-white border border-emerald-200 rounded-lg px-3 py-2 text-sm text-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-300';
-
+  const onUpdate = (key) => (val) => setFilters((f) => ({ ...f, [key]: val }));
   return (
-    <section id="direktori" className="bg-emerald-50 border-y border-emerald-100">
-      <div className="max-w-6xl mx-auto px-4 py-4">
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="relative">
-            <select
-              className={`${base} pr-8`}
-              value={filters.city}
-              onChange={(e) => setFilters({ ...filters, city: e.target.value })}
-            >
-              <option value="">Semua Kota</option>
-              {cities.map((c) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-            <ChevronDown size={16} className="absolute right-2 top-1/2 -translate-y-1/2 text-emerald-500 pointer-events-none" />
-          </div>
-
-          <div className="relative">
-            <select
-              className={`${base} pr-8`}
-              value={filters.topic}
-              onChange={(e) => setFilters({ ...filters, topic: e.target.value })}
-            >
-              <option value="">Semua Tema</option>
-              {topics.map((t) => (
-                <option key={t} value={t}>{t}</option>
-              ))}
-            </select>
-            <ChevronDown size={16} className="absolute right-2 top-1/2 -translate-y-1/2 text-emerald-500 pointer-events-none" />
-          </div>
-
-          <div className="relative">
-            <select
-              className={`${base} pr-8`}
-              value={filters.method}
-              onChange={(e) => setFilters({ ...filters, method: e.target.value })}
-            >
-              <option value="">Semua Metode</option>
-              {methods.map((m) => (
-                <option key={m} value={m}>{m}</option>
-              ))}
-            </select>
-            <ChevronDown size={16} className="absolute right-2 top-1/2 -translate-y-1/2 text-emerald-500 pointer-events-none" />
-          </div>
-        </div>
+    <section className="border-y border-emerald-100 bg-emerald-50/40">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <Select label="Kota" value={filters.city} onChange={onUpdate('city')} options={cities} />
+        <Select label="Tema" value={filters.topic} onChange={onUpdate('topic')} options={topics} />
+        <Select label="Metode" value={filters.method} onChange={onUpdate('method')} options={methods} />
       </div>
     </section>
   );

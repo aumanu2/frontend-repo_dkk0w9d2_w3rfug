@@ -1,4 +1,8 @@
 import Hero from './components/Hero';
+import Profile from './components/Profile';
+import ContentHub from './components/ContentHub';
+import Agenda from './components/Agenda';
+import Reputation from './components/Reputation';
 import Sermons from './components/Sermons';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -7,6 +11,14 @@ import { useState } from 'react';
 
 export default function App() {
   const [open, setOpen] = useState(false);
+
+  const nav = [
+    { href: '#profile', label: 'Profil' },
+    { href: '#content', label: 'Konten' },
+    { href: '#agenda', label: 'Agenda' },
+    { href: '#reputation', label: 'Reputasi' },
+    { href: '#contact', label: 'Kontak' },
+  ];
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
@@ -17,9 +29,11 @@ export default function App() {
             Al-Nur
           </a>
           <nav className="hidden gap-8 text-sm font-medium text-gray-700 md:flex">
-            <a href="#sermons" className="hover:text-emerald-700">Ceramah</a>
-            <a href="#about" className="hover:text-emerald-700">Tentang</a>
-            <a href="#contact" className="hover:text-emerald-700">Kontak</a>
+            {nav.map((n) => (
+              <a key={n.href} href={n.href} className="hover:text-emerald-700">
+                {n.label}
+              </a>
+            ))}
           </nav>
           <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle Menu">
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -28,9 +42,11 @@ export default function App() {
         {open && (
           <div className="border-t border-gray-200 bg-white px-6 py-3 md:hidden">
             <div className="flex flex-col gap-3 text-sm font-medium text-gray-700">
-              <a href="#sermons" onClick={() => setOpen(false)} className="hover:text-emerald-700">Ceramah</a>
-              <a href="#about" onClick={() => setOpen(false)} className="hover:text-emerald-700">Tentang</a>
-              <a href="#contact" onClick={() => setOpen(false)} className="hover:text-emerald-700">Kontak</a>
+              {nav.map((n) => (
+                <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="hover:text-emerald-700">
+                  {n.label}
+                </a>
+              ))}
             </div>
           </div>
         )}
@@ -38,6 +54,11 @@ export default function App() {
 
       <main>
         <Hero />
+        <Profile />
+        <ContentHub />
+        <Agenda />
+        <Reputation />
+        {/* Bagian sebelumnya tetap tersedia jika ingin dipakai */}
         <Sermons />
         <About />
         <Contact />

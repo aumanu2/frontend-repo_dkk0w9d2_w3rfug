@@ -8,14 +8,14 @@ export default function Hero() {
           <div className="w-full lg:w-1/2">
             <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-700">
               <Mic className="h-4 w-4" />
-              Islamic Scholar & Preacher
+              Ulama & Penceramah Islam
             </div>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-              Sheikh Ahmad Al-Nur
+              Syaikh Ahmad Al-Nur
             </h1>
             <p className="mt-4 max-w-xl text-lg leading-7 text-gray-600">
-              Inspiring hearts through Qur’an, Sunnah, and timeless wisdom. Sharing
-              sermons, lectures, and guidance for a balanced, faith-centered life.
+              Menginspirasi hati melalui Al-Qur’an, Sunnah, dan hikmah yang abadi. 
+              Berbagi khutbah, kajian, dan bimbingan untuk hidup yang seimbang dan berlandaskan iman.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -24,13 +24,13 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
               >
                 <Play className="h-5 w-5" />
-                Watch Sermons
+                Tonton Ceramah
               </a>
               <a
                 href="#contact"
                 className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-5 py-3 font-semibold text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
               >
-                Contact
+                Kontak
               </a>
             </div>
           </div>

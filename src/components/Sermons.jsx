@@ -2,19 +2,19 @@ import { PlayCircle, Youtube, Headphones, Clock } from 'lucide-react';
 
 const sermons = [
   {
-    title: 'Mercy and Forgiveness in the Qur’an',
+    title: 'Rahmat dan Ampunan dalam Al-Qur’an',
     duration: '42:15',
     platform: 'YouTube',
     link: 'https://www.youtube.com/',
   },
   {
-    title: 'Finding Tranquility in Prayer',
+    title: 'Menemukan Ketenangan dalam Shalat',
     duration: '36:02',
     platform: 'Podcast',
     link: 'https://spotify.com',
   },
   {
-    title: 'Patience: A Path to Jannah',
+    title: 'Sabar: Jalan Menuju Jannah',
     duration: '28:47',
     platform: 'YouTube',
     link: 'https://www.youtube.com/',
@@ -27,14 +27,14 @@ export default function Sermons() {
       <div className="container mx-auto px-6">
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Recent Sermons</h2>
-            <p className="mt-2 text-gray-600">Watch and listen to selected lectures and reminders.</p>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Ceramah Terbaru</h2>
+            <p className="mt-2 text-gray-600">Tonton dan dengarkan kajian pilihan.</p>
           </div>
           <a
             href="#"
             className="hidden rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 sm:inline-block"
           >
-            View All
+            Lihat Semua
           </a>
         </div>
 

@@ -17,9 +17,9 @@ export default function App() {
             Al-Nur
           </a>
           <nav className="hidden gap-8 text-sm font-medium text-gray-700 md:flex">
-            <a href="#sermons" className="hover:text-emerald-700">Sermons</a>
-            <a href="#about" className="hover:text-emerald-700">About</a>
-            <a href="#contact" className="hover:text-emerald-700">Contact</a>
+            <a href="#sermons" className="hover:text-emerald-700">Ceramah</a>
+            <a href="#about" className="hover:text-emerald-700">Tentang</a>
+            <a href="#contact" className="hover:text-emerald-700">Kontak</a>
           </nav>
           <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle Menu">
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -28,9 +28,9 @@ export default function App() {
         {open && (
           <div className="border-t border-gray-200 bg-white px-6 py-3 md:hidden">
             <div className="flex flex-col gap-3 text-sm font-medium text-gray-700">
-              <a href="#sermons" onClick={() => setOpen(false)} className="hover:text-emerald-700">Sermons</a>
-              <a href="#about" onClick={() => setOpen(false)} className="hover:text-emerald-700">About</a>
-              <a href="#contact" onClick={() => setOpen(false)} className="hover:text-emerald-700">Contact</a>
+              <a href="#sermons" onClick={() => setOpen(false)} className="hover:text-emerald-700">Ceramah</a>
+              <a href="#about" onClick={() => setOpen(false)} className="hover:text-emerald-700">Tentang</a>
+              <a href="#contact" onClick={() => setOpen(false)} className="hover:text-emerald-700">Kontak</a>
             </div>
           </div>
         )}
@@ -45,10 +45,10 @@ export default function App() {
 
       <footer className="border-t border-gray-200 bg-white">
         <div className="container mx-auto flex flex-col items-center justify-between gap-3 px-6 py-6 text-sm text-gray-600 md:flex-row">
-          <p>© {new Date().getFullYear()} Al-Nur. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Al-Nur. Seluruh hak cipta dilindungi.</p>
           <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-emerald-700">Privacy</a>
-            <a href="#" className="hover:text-emerald-700">Terms</a>
+            <a href="#" className="hover:text-emerald-700">Privasi</a>
+            <a href="#" className="hover:text-emerald-700">Ketentuan</a>
           </div>
         </div>
       </footer>
